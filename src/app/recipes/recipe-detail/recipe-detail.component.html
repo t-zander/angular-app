@@ -1,0 +1,43 @@
+<div *ngIf="currentRecipe">
+  <div class="row">
+    <div class="col">
+      <img [src]="currentRecipe.imgURL" height="500">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Manage recipe
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="onAdd2Cart()">To shopping list</a>
+          <a class="dropdown-item" (click)="onNavEditRecipe()" data-toggle="modal" data-target="#authModal">
+            Edit recipe
+          </a>
+          <a class="dropdown-item" (click)="onDeleteRecipe()">Delete recipe</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1>{{currentRecipe.name}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      {{currentRecipe.description}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ul class="list-group" *ngFor="let ingredient of currentRecipe.ingredients">
+        <li href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
+          {{ingredient.name}}
+          <span class="badge badge-primary badge-pill">{{ingredient.amount}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

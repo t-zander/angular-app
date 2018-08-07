@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col">
+    <button data-toggle="modal" data-target="#authModal" class="btn btn-outline-secondary" (click)="onAddRecipe()">
+      New recipe
+    </button>
+  </div>
+</div>
+<div class="row pt-3">
+  <div class="col">
+    <app-recipe-item class="list-group" *ngFor="let recipe of recipes; let i = index" [recipe]="recipe" [index]="i">
+    </app-recipe-item>
+  </div>
+</div>

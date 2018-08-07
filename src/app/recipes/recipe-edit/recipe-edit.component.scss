@@ -7,6 +7,9 @@ $invalidBorderFocus: 0 0 0 0.2rem rgba(255,10,29,0.25) !important;
 input.ng-invalid.ng-touched{
   border-color: $invalidBorder;
 }
+input.ng-invalid.ng-touched:after{
+  content: 'This is a required field';
+}
 input.ng-invalid.ng-touched:focus{
   box-shadow: $invalidBorderFocus;
 }
