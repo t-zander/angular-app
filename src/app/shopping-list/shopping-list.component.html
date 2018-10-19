@@ -4,7 +4,7 @@
     <hr>
     <div class="list-group w-50">
       <a class="list-group-item list-group-item-action d-flex justify-content-between"
-         *ngFor="let ingredientItem of ingredients; let i = index" (click)="onEditItem(i)">
+         *ngFor="let ingredientItem of (shoppingListState | async).ingredients; let i = index" (click)="onEditItem(i)">
         {{ingredientItem.name}}
         <span class="badge badge-primary badge-pill">{{ingredientItem.amount}}</span>
       </a>

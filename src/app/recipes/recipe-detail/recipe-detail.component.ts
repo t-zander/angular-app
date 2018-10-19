@@ -1,11 +1,14 @@
 import { AuthAlertComponent } from './../../auth/auth-alert/auth-alert.component';
 import { ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import {Component, Input, OnInit} from '@angular/core';
-import {ShoppingListService} from '../../shopping-list/shopping-list.service';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {RecipeService} from '../recipe.service';
 import {Recipe} from '../Recipe.model';
 import { AuthService } from '../../auth/auth.service';
+import { Store } from '@ngrx/store';
+
+import * as shoppingListActions from '../../shopping-list/store/shopping-list.actions';
+import * as AppReducers from '../../store/app.reducers';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,7 +19,7 @@ export class RecipeDetailComponent implements OnInit {
   recipeId: number;
   currentRecipe: Recipe;
 
-  constructor(private shoppingListService: ShoppingListService,
+  constructor(private store: Store<AppReducers.IAppState>,
               private recipeService: RecipeService,
               private authService: AuthService,
               private activatedRoute: ActivatedRoute,
@@ -44,8 +47,9 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onAdd2Cart() {
-    this.shoppingListService
-      .addIngredients(this.currentRecipe.ingredients);
+    /* this.shoppingListService
+      .addIngredients(this.currentRecipe.ingredients); */
+    this.store.dispatch(new shoppingListActions.AddIngredients(this.currentRecipe.ingredients));
   }
 
   onDeleteRecipe() {

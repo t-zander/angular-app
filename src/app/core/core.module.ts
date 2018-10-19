@@ -6,7 +6,6 @@ import {SharedModule} from '../shared/shared.module';
 import {AppRoutingModule} from '../app-routing.module';
 import {AuthService} from '../auth/auth.service';
 import {RecipeService} from '../recipes/recipe.service';
-import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthGuard} from '../auth/auth.guard';
 
 @NgModule({
@@ -24,6 +23,6 @@ import {AuthGuard} from '../auth/auth.guard';
     HeaderComponent,
     HomeComponent
   ],
-  providers: [RecipeService, ShoppingListService, AuthService, AuthGuard]
+  providers: []
 })
 export class CoreModule { }

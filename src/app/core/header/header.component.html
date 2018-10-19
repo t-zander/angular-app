@@ -17,20 +17,20 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a *ngIf="isAuthenticated()" class="dropdown-item" (click)="onSaveRecipes()">Save data</a>
+            <a *ngIf="(authenticationState | async).userAuthenticated" class="dropdown-item" (click)="onSaveRecipes()">Save data</a>
             <a class="dropdown-item" (click)="onFetchRecipes()">Fetch data</a>
           </div>
         </li>
-        <ng-template [ngIf]="!isAuthenticated()">
+        <ng-container *ngIf="!(authenticationState | async).userAuthenticated">
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/signup">Sign Up</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/signin">Sign In</a>
           </li>
-        </ng-template>
+        </ng-container>
         <li class="nav-item" routerLinkActive="active">
-          <a *ngIf="isAuthenticated()" (click)="onLogout()" class="nav-link" style="cursor: pointer">
+          <a *ngIf="(authenticationState | async).userAuthenticated" (click)="onLogout()" class="nav-link" style="cursor: pointer">
             Logout
           </a>
         </li>

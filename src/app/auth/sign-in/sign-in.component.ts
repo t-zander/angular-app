@@ -1,7 +1,12 @@
-import { Router } from '@angular/router';
+import { TrySignIn } from './../store/authentication.actions';
+import * as FromApp from '../../store/app.reducers';
+import * as AuthenticationReducers from '../../auth/store/authentication.reducers';
+import * as AuthenticationActions from './../../auth/store/authentication.actions';
+
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +15,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private store: Store<FromApp.IAppState>) { }
 
   ngOnInit() {
     this.signInForm = new FormGroup(
@@ -23,10 +30,10 @@ export class SignInComponent implements OnInit {
   onSignIn() {
     const email = this.signInForm.get('email').value;
     const password = this.signInForm.get('password').value;
-    this.authService.signInUser(email, password)
-    .then(
-      null,
-      errors => console.log(errors)
-    );
+    this.store.dispatch(new TrySignIn)
+    /* this.authService.signInUser(email, password)
+      .then(
+        errors => console.log(errors)
+      ); */
   }
 }
